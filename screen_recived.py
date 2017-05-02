@@ -23,7 +23,7 @@ while True:
  
 #On a la taille de l'image, jusqu'à ce qu'on ait tout téléchargé
     while contenuTelecharge < tailleImage:
-    #On lit les 1024 octets suivant
+    #On lit les 5000 octets suivant
         contenuRecu = s.recv(5000)
     #On enregistre dans le fichier
         fichierImage.write(contenuRecu)
