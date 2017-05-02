@@ -101,7 +101,7 @@ class Client(asyncore.dispatcher):
                     encoded_string = base64.b64encode(image_file.read())
                 #im.show()
         #Chemin vers l'image
-        cheminImage = "/home/fc_dev/python/screen/output.jpg"
+        cheminImage = "output.jpg"
         fichierImage = open(cheminImage, "rb")
  
         #On récupère la taille du fichier image en octets que l'on convertit en chaine de caractères
