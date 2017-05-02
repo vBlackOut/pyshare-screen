@@ -1,5 +1,4 @@
 from __future__ import print_function
-# except for python3
 try:
     from StringIO import StringIO
 except ImportError:
@@ -96,12 +95,11 @@ class Client(asyncore.dispatcher):
                 draw.ellipse(bbox, fill=128)
                 del draw
 
-                im.save("output.jpg")
-                time.sleep(0.3)
+                im.save("output.jpg", optimize=True, quality=100)
+                time.sleep(0.10)
                 with open("output.jpg", "rb") as image_file:
                     encoded_string = base64.b64encode(image_file.read())
                 #im.show()
-        time.sleep(0.30)
         #Chemin vers l'image
         cheminImage = "/home/fc_dev/python/screen/output.jpg"
         fichierImage = open(cheminImage, "rb")
