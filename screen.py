@@ -23,6 +23,10 @@ import concurrent.futures
 import resource
 from mss import mss
 import os
+import resource
+
+soft, hard = resource.getrlimit(resource.RLIMIT_NOFILE)
+resource.setrlimit(resource.RLIMIT_NOFILE, (1000, hard))
 
 from gi.repository import Gdk
 s = Gdk.Screen.get_default()
@@ -95,13 +99,13 @@ class Client(asyncore.dispatcher):
                 draw.ellipse(bbox, fill=128)
                 del draw
 
-                im.save("output.jpg", optimize=True, quality=100)
-                time.sleep(0.10)
-                with open("output.jpg", "rb") as image_file:
-                    encoded_string = base64.b64encode(image_file.read())
+                im.save("output.jpg", optimize=True, quality=70)
+                time.sleep(0.20)
+                #with open("output.jpg", "rb") as image_file:
+                #    encoded_string = base64.b64encode(image_file.read())
                 #im.show()
         #Chemin vers l'image
-        cheminImage = "output.jpg"
+        cheminImage = "/home/fc_dev/python/screen/output.jpg"
         fichierImage = open(cheminImage, "rb")
  
         #On récupère la taille du fichier image en octets que l'on convertit en chaine de caractères

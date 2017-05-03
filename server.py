@@ -4,6 +4,11 @@ import asyncore
 import collections
 import logging
 import socket
+import resource
+
+soft, hard = resource.getrlimit(resource.RLIMIT_NOFILE)
+resource.setrlimit(resource.RLIMIT_NOFILE, (1000, hard))
+
 
 MAX_MESSAGE_LENGTH = 999999
 
