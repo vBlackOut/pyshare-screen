@@ -41,7 +41,7 @@ def Draw(oldframe=None):
     #On a la taille de l'image, jusqu'à ce qu'on ait tout téléchargé
         while contenuTelecharge < tailleImage:
         #On lit les 1024 octets suivant
-            contenuRecu = s.recv(2048)
+            contenuRecu = s.recv(1024)
         #On enregistre dans le fichier
             fichierImage.write(contenuRecu)
         #On ajoute la taille du contenu reçu au contenu téléchargé
@@ -57,9 +57,9 @@ def Draw(oldframe=None):
     return frame
 
 def Refresher(frame=None):
-    print 'refreshing'
+    #print 'refreshing'
     frame = Draw(frame)
-    frame.after(50, Refresher, frame) # refresh in 10 seconds
+    frame.after(10, Refresher, frame) # refresh in 10 seconds
     
 top = Tkinter.Tk()
 Refresher()

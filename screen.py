@@ -99,8 +99,7 @@ class Client(asyncore.dispatcher):
                 draw.ellipse(bbox, fill=128)
                 del draw
 
-                im.save("output.jpg", optimize=True, quality=70)
-                time.sleep(0.20)
+                im.save("output.jpg", optimize=True, quality=80)
                 #with open("output.jpg", "rb") as image_file:
                 #    encoded_string = base64.b64encode(image_file.read())
                 #im.show()
@@ -113,7 +112,8 @@ class Client(asyncore.dispatcher):
         #On rajoute des 0 devant la taille jusqu'à que la chaine fasse 8 caractères
         for i in range(8-len(tailleImage)):
             tailleImage = "0"+ tailleImage
- 
+
+        time.sleep(0.01)
         #On a la taille de l'image, on l'envoie au client
         self.send(tailleImage.encode())
  
@@ -140,4 +140,4 @@ if __name__ == '__main__':
 	while True:
 		count = count + 1
 		client.say(count)
-		time.sleep(0.02)
+		#time.sleep(0.02)
