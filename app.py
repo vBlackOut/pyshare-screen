@@ -31,36 +31,50 @@ def Draw(oldframe=None):
     #On récupère les 8 premier octets
         tailleImage = s.recv(8)
     #On convertit la taille de l'image en entier (en octets)
-        tailleImage = int(tailleImage.decode())
+        try:
+            tailleImage = int(tailleImage.decode())
     #Contenu téléchargé en octets
-        contenuTelecharge = 0
-        totalstring = ""
+            contenuTelecharge = 0
+            totalstring = ""
     #Le fichier qui va contenir l'image
-        fichierImage = open("image.jpg","wb")
+            fichierImage = open("image.jpg","wb")
 
     #On a la taille de l'image, jusqu'à ce qu'on ait tout téléchargé
-        while contenuTelecharge < tailleImage:
+            while contenuTelecharge < tailleImage:
         #On lit les 1024 octets suivant
-            contenuRecu = s.recv(1024)
+                contenuRecu = s.recv(1024)
         #On enregistre dans le fichier
-            fichierImage.write(contenuRecu)
+                fichierImage.write(contenuRecu)
         #On ajoute la taille du contenu reçu au contenu téléchargé
-            contenuTelecharge += len(contenuRecu)
-            totalstring += contenuRecu
-        fichierImage.close()
-        break
-    im = ImageTk.PhotoImage(data=totalstring)
-    box1Label = Tkinter.Label(frame, image=im).pack()
+                contenuTelecharge += len(contenuRecu)
+                totalstring += contenuRecu
+            fichierImage.close()
+            break
 
-    if oldframe is not None:
-        oldframe.destroy() # cleanup
-    return frame
+        except UnicodeDecodeError:
+            pass
+        except ValueError:
+            pass
+    try:
+        im = ImageTk.PhotoImage(data=totalstring)
+        box1Label = Tkinter.Label(frame, image=im).pack()
+
+        if oldframe is not None:
+           oldframe.destroy() # cleanup
+        return frame
+    except IOError as e:
+        print e
+        return frame
 
 def Refresher(frame=None):
     #print 'refreshing'
     frame = Draw(frame)
-    frame.after(10, Refresher, frame) # refresh in 10 seconds
-    
+    try:
+       frame.after(10, Refresher, frame) # refresh in 10 seconds
+    except AttributeError as e:
+       frame.after(10, Refresher, frame)
+	
+
 top = Tkinter.Tk()
 Refresher()
 Tkinter.mainloop()
