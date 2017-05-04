@@ -12,7 +12,7 @@ import resource
 soft, hard = resource.getrlimit(resource.RLIMIT_NOFILE)
 resource.setrlimit(resource.RLIMIT_NOFILE, (1000, hard))
 
-TCP_IP = '127.0.0.1'
+TCP_IP = '10.60.0.100'
 TCP_PORT = 16000
 
 BUFFER_SIZE = 9999999
