@@ -44,7 +44,7 @@ def Draw(oldframe=None):
     #On a la taille de l'image, jusqu'à ce qu'on ait tout téléchargé
             while contenuTelecharge < tailleImage:
         #On lit les 1024 octets suivant
-                contenuRecu = s.recv(256)
+                contenuRecu = s.recv(8)
         #On enregistre dans le fichier
                 fichierImage.write(contenuRecu)
         #On ajoute la taille du contenu reçu au contenu téléchargé
