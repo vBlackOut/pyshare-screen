@@ -61,10 +61,10 @@ def Draw(oldframe=None):
         #totalstring = zlib.decompress(totalstring)
         try:
             gzip_compress = zlib.decompress(totalstring, zlib.MAX_WBITS)
+            im = ImageTk.PhotoImage(data=gzip_compress)
+            box1Label = Tkinter.Label(frame, image=im).pack()
         except:
-            return frame
-        im = ImageTk.PhotoImage(data=gzip_compress)
-        box1Label = Tkinter.Label(frame, image=im).pack()
+            pass
         try:
            if oldframe is not None:
                oldframe.destroy() # cleanup
